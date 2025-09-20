@@ -1,0 +1,10 @@
+[2024-12-16 05-02-47] PHP Warning: Undefined array key " id_vehicule" in D:\WEB\Prepa_Examen\app\views\welcome.php:15  @  http://172.50.106.145:8000/ 
+[2024-12-16 05-02-47] PHP Warning: Undefined array key " id_vehicule" in D:\WEB\Prepa_Examen\app\views\welcome.php:15  @  http://172.50.106.145:8000/ 
+[2024-12-16 05-03-18] PHP Warning: Undefined array key " id_vehicule" in D:\WEB\Prepa_Examen\app\views\welcome.php:15  @  http://172.50.106.145:8000/ 
+[2024-12-16 05-03-18] PHP Warning: Undefined array key " id_vehicule" in D:\WEB\Prepa_Examen\app\views\welcome.php:15  @  http://172.50.106.145:8000/ 
+[2024-12-16 05-03-20] PHP Warning: Undefined array key " id_vehicule" in D:\WEB\Prepa_Examen\app\views\welcome.php:15  @  http://172.50.106.145:8000/ 
+[2024-12-16 05-03-20] PHP Warning: Undefined array key " id_vehicule" in D:\WEB\Prepa_Examen\app\views\welcome.php:15  @  http://172.50.106.145:8000/ 
+[2024-12-18 01-46-08] PHP Warning: Undefined array key "date" in D:\WEB\Prepa_Examen\app\views\beneficeParJour.php:43  @  http://192.168.74.45:8000/triageBenefJour?date=2024-12-07 
+[2024-12-18 01-46-08] PHP Warning: Undefined array key "benefice" in D:\WEB\Prepa_Examen\app\views\beneficeParJour.php:43  @  http://192.168.74.45:8000/triageBenefJour?date=2024-12-07 
+[2024-12-18 01-48-34] PHP Warning: Undefined array key "date" in D:\WEB\Prepa_Examen\app\views\beneficeParJour.php:43  @  http://192.168.74.45:8000/triageBenefJour?date=2024-12-10 
+[2024-12-18 01-48-34] PHP Warning: Undefined array key "benefice" in D:\WEB\Prepa_Examen\app\views\beneficeParJour.php:43  @  http://192.168.74.45:8000/triageBenefJour?date=2024-12-10 

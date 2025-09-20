@@ -1,0 +1,228 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    padding-top: 160px;
+}
+
+/* Categories */
+.categories-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #ebebeb;
+    z-index: 100;
+}
+
+.categories {
+    display: flex;
+    gap: 32px;
+    padding: 16px 0;
+    overflow-x: auto;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #717171;
+    border-bottom: 2px solid transparent;
+}
+
+.category-item:hover {
+    color: #222;
+    border-bottom-color: #dddddd;
+}
+
+.category-item.active {
+    color: #222;
+    border-bottom-color: #222;
+}
+
+.filters-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+}
+
+/* Listings */
+.listings-container {
+    margin-top: 32px;
+}
+
+/* Mise à jour des styles pour les listings et images */
+.listing-card {
+    position: relative;
+    margin-bottom: 24px;
+    transition: transform 0.2s ease;
+}
+
+.listing-card:hover {
+    transform: scale(1.02);
+}
+
+.listing-images {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 350px; /* Hauteur fixe pour toutes les images */
+}
+
+/* Style du carousel */
+.carousel {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.carousel-item {
+    height: 100%;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-top: 60px;
+}
+
+/* Boutons du carousel */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.9;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    margin-top: 400px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Style du carousel et des contrôles */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
+
+/* Effet de survol */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+    background-color: white;
+}
+
+/* Bouton favoris */
+.favorite-button {
+    position: absolute;
+    top: 70px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2;
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+}
+
+.favorite-button:hover {
+    color: #ff385c;
+}
+
+/* Informations de la carte */
+.listing-info {
+    padding: 16px 8px;
+}
+
+.listing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.listing-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.rating i {
+    color: #ff385c;
+}
+
+.listing-type {
+    color: #717171;
+    margin-bottom: 8px;
+}
+
+.listing-price {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Effet de survol pour les contrôles du carousel */
+.listing-card:hover .carousel-control-prev,
+.listing-card:hover .carousel-control-next {
+    opacity: 1;
+}
+
+
