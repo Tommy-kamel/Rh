@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="mt-4">
-            <a href="/contrat/export-pdf?id_contrat=<?= $contrat['id_contrat'] ?>" class="btn btn-primary">Générer PDF</a>
+            <a href="/rh/contrat/export-pdf/<?= $contrat['id_contrat'] ?>" class="btn btn-primary">Générer PDF</a>
             <a href="/rh/menu_employe" class="btn btn-secondary">Retour au menu</a>
         </div>
     </div>

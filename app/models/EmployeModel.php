@@ -14,23 +14,17 @@ class EmployeModel {
 
     // Mila atambatra am contrat
     public function getAllEmployesSousContrat() {
-        $stmt = $this->db->prepare("SELECT * FROM employe");
+        $stmt = $this->db->prepare("SELECT e.*, c.* FROM employe e JOIN contrat c ON e.id_employe = c.id_employe WHERE c.date_fin IS NULL");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllEmployesSousContratEssai() {
-        $stmt = $this->db->prepare("SELECT ca.*,ce.* FROM candidat_retenu ca JOIN contrat_essai ce ON ca.id_candidat_retenu = ce.id_candidat_retenu");
+        $stmt = $this->db->prepare("SELECT ca.*,ce.* FROM candidat_retenu ca JOIN contrat_essai ce ON ca.id_candidat_retenu = ce.id_candidat_retenu WHERE ce.date_fin IS NULL");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /* public function getCandidatRetenuByContratEssaiId($id_contrat_essai) {
-        $stmt = $this->db->prepare("SELECT * FROM contrat_essai WHERE id_contrat_essai = :id_contrat_essai");
-        $stmt->execute([':id_contrat_essai' => $id_contrat_essai]);
-        $contrat = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $contrat ? $contrat['id_candidat_retenu'] : null;
-    } */
 
     public function getContratEssaiById($id_contrat_essai) {
         $stmt = $this->db->prepare("SELECT * FROM contrat_essai WHERE id_contrat_essai = :id_contrat_essai");
@@ -88,5 +82,81 @@ class EmployeModel {
         $stmt = $this->db->prepare("SELECT * FROM employe WHERE id_employe = :id_employe");
         $stmt->execute([':id_employe' => $id_employe]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllEmployesSousContratEssaiFiltered($filters = []) {
+        $sql = "SELECT ca.*, ce.* FROM candidat_retenu ca JOIN contrat_essai ce ON ca.id_candidat_retenu = ce.id_candidat_retenu WHERE ce.date_fin IS NULL";
+        $params = [];
+
+        if (!empty($filters['nom'])) {
+            $sql .= " AND ca.nom LIKE :nom";
+            $params[':nom'] = '%' . $filters['nom'] . '%';
+        }
+        if (!empty($filters['prenom'])) {
+            $sql .= " AND ca.prenom LIKE :prenom";
+            $params[':prenom'] = '%' . $filters['prenom'] . '%';
+        }
+        if (!empty($filters['date_debut_debut'])) {
+            $sql .= " AND ce.date_debut >= :date_debut_debut";
+            $params[':date_debut_debut'] = $filters['date_debut_debut'];
+        }
+        if (!empty($filters['date_debut_fin'])) {
+            $sql .= " AND ce.date_debut <= :date_debut_fin";
+            $params[':date_debut_fin'] = $filters['date_debut_fin'];
+        }
+        if (!empty($filters['date_fin_debut'])) {
+            $sql .= " AND ce.date_fin >= :date_fin_debut";
+            $params[':date_fin_debut'] = $filters['date_fin_debut'];
+        }
+        if (!empty($filters['date_fin_fin'])) {
+            $sql .= " AND ce.date_fin <= :date_fin_fin";
+            $params[':date_fin_fin'] = $filters['date_fin_fin'];
+        }
+        if (!empty($filters['salaire_min'])) {
+            $sql .= " AND ce.salaire >= :salaire_min";
+            $params[':salaire_min'] = $filters['salaire_min'];
+        }
+        if (!empty($filters['salaire_max'])) {
+            $sql .= " AND ce.salaire <= :salaire_max";
+            $params[':salaire_max'] = $filters['salaire_max'];
+        }
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllEmployesSousContratFiltered($filters = []) {
+        $sql = "SELECT e.*, c.* FROM employe e JOIN contrat c ON e.id_employe = c.id_employe WHERE c.date_fin IS NULL";
+        $params = [];
+
+        if (!empty($filters['nom'])) {
+            $sql .= " AND e.nom LIKE :nom";
+            $params[':nom'] = '%' . $filters['nom'] . '%';
+        }
+        if (!empty($filters['prenom'])) {
+            $sql .= " AND e.prenom LIKE :prenom";
+            $params[':prenom'] = '%' . $filters['prenom'] . '%';
+        }
+        if (!empty($filters['date_debut_debut'])) {
+            $sql .= " AND c.date_debut >= :date_debut_debut";
+            $params[':date_debut_debut'] = $filters['date_debut_debut'];
+        }
+        if (!empty($filters['date_debut_fin'])) {
+            $sql .= " AND c.date_debut <= :date_debut_fin";
+            $params[':date_debut_fin'] = $filters['date_debut_fin'];
+        }
+        if (!empty($filters['salaire_min'])) {
+            $sql .= " AND c.salaire >= :salaire_min";
+            $params[':salaire_min'] = $filters['salaire_min'];
+        }
+        if (!empty($filters['salaire_max'])) {
+            $sql .= " AND c.salaire <= :salaire_max";
+            $params[':salaire_max'] = $filters['salaire_max'];
+        }
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

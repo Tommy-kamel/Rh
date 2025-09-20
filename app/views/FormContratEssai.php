@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contrat d'Essai</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Animations uniquement */
+/* Animations uniquement */
         .form-step {
             display: none;
             animation: fadeIn 0.5s ease-in-out;
@@ -37,9 +38,50 @@
             background-color: #0d6efd;
             transition: width 0.3s ease;
         }
+
+        h2{
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #343a40;
+        }
     </style>
 </head>
 <body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Gestion d'entreprise</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rh/dashboard">Tableau de bord</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rh/menu_employe">Gestion des employés</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rh/recrutement">Recrutement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contrats</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="nav-link">Connecté en tant que <?= $_SESSION['utilisateur']['nom_utilisateur'] ?? 'Utilisateur' ?></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Déconnexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">

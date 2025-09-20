@@ -127,11 +127,26 @@ class PostulerController {
         Flight::render('postuler', $data);
     }
 
-    public function afficherCandidatures() {
-        // Fetch all candidatures from the database
-        $candidatures = Flight::PostulerModel()->getAllCandidatures();
+    // public function afficherCandidatures() {
+    //     // Fetch all candidatures from the database
+    //     $candidatures = Flight::PostulerModel()->getAllCandidatures();
     
-        // Render the view and pass the data
-        Flight::render('rh/candidatures', ['candidatures' => $candidatures]);
+    //     // Render the view and pass the data
+    //     Flight::render('rh/candidatures', ['candidatures' => $candidatures]);
+    // }
+
+    public function afficherCandidatures() {
+        $filters = [
+            'nom_prenom' => $_GET['nom_prenom'] ?? '',
+            'email' => $_GET['email'] ?? '',
+            'niveau_etude' => $_GET['niveau_etude'] ?? '',
+            'experience' => $_GET['experience'] ?? '',
+            'sexe' => $_GET['sexe'] ?? '',
+            'date_debut' => $_GET['date_debut'] ?? '',
+            'date_fin' => $_GET['date_fin'] ?? '',
+        ];
+
+        $candidatures = Flight::PostulerModel()->getCandidaturesFiltered($filters);
+        Flight::render('rh/candidatures', ['candidatures' => $candidatures, 'filters' => $filters]);
     }
 }
