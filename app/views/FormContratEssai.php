@@ -70,14 +70,14 @@
                                 
                                 <div class="mb-4">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="nom_entreprise" name="nom_entreprise" placeholder="Nom de l'entreprise" required>
+                                        <input type="text" class="form-control" id="nom_entreprise" name="nom_entreprise" placeholder="Nom de l'entreprise" value="SARL TANA SERVICES" required>
                                         <label for="nom_entreprise" class="fw-semibold">Nom de l'entreprise *</label>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-4">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="adresse_entreprise" name="adresse_entreprise" placeholder="Adresse de l'entreprise" required>
+                                        <input type="text" class="form-control" id="adresse_entreprise" name="adresse_entreprise" placeholder="Adresse de l'entreprise" value="Lot II M 45, Antananarivo 101, Madagascar" required>
                                         <label for="adresse_entreprise" class="fw-semibold">Adresse de l'entreprise *</label>
                                     </div>
                                 </div>
@@ -85,13 +85,13 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="nif" name="nif" placeholder="NIF" required>
+                                            <input type="text" class="form-control" id="nif" name="nif" placeholder="NIF" value="1234567890 " required>
                                             <label for="nif" class="fw-semibold">NIF *</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="stat" name="stat" placeholder="STAT" required>
+                                            <input type="text" class="form-control" id="stat" name="stat" placeholder="STAT" value="82901 11 2020 0 12345" required>
                                             <label for="stat" class="fw-semibold">STAT *</label>
                                         </div>
                                     </div>
@@ -99,7 +99,7 @@
                                 
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="directeur_general" name="directeur_general" placeholder="Directeur général" required>
+                                        <input type="text" class="form-control" id="directeur_general" name="directeur_general" placeholder="Directeur général" value="RAKOTONIRINA Sophie" required>
                                         <label for="directeur_general" class="fw-semibold">Directeur général *</label>
                                     </div>
                                 </div>
@@ -124,7 +124,6 @@
                                                 <option value="2">2 mois</option>
                                                 <option value="3">3 mois</option>
                                                 <option value="6">6 mois</option>
-                                                <option value="12">12 mois</option>
                                             </select>
                                             <label for="duree_contrat" class="fw-semibold">Durée du contrat (mois) *</label>
                                         </div>
@@ -196,8 +195,8 @@
                                 
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="lieu" name="lieu" placeholder="Ex: Antananarivo" required>
-                                        <label for="lieu" class="fw-semibold">Lieu (fait à) *</label>
+                                        <input type="text" class="form-control" id="lieu" name="lieu" placeholder="Ex: Antananarivo" value="Antananarivo" required>
+                                        <label for="lieu" class="fw-semibold">Lieu</label>
                                     </div>
                                 </div>
                             </div>
@@ -212,10 +211,7 @@
                                     Suivant →
                                 </button>
                                 <button type="submit" class="btn btn-success btn-md fw-semibold" id="submitBtn" style="display: none;">
-                                    ✓ Créer le contrat
-                                </button>
-                                <button type="submit" class="btn btn-primary btn-md fw-semibold" name="export_pdf" value="1" id="submitPdfBtn" style="display: block;">
-                                    Créer et télécharger PDF
+                                    Valider
                                 </button>
                             </div>
                         </form>

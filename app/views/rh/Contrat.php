@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails du Contrat d'Essai - RH</title>
+    <title>Détails du Contrat - RH</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
@@ -41,29 +41,28 @@
     </nav>
 
     <div class="container mt-4">
-        <h1>Détails du Contrat d'Essai</h1>
+        <h1>Détails du Contrat</h1>
         <div class="row">
             <div class="col-md-6">
                 <h3>Informations de l'Employé</h3>
-                <p><strong>Nom:</strong> <?= htmlspecialchars($nom_salarie ?? '') ?></p>
-                <p><strong>Adresse:</strong> <?= htmlspecialchars($adresse_salarie ?? '') ?></p>
-                <p><strong>Poste:</strong> <?= htmlspecialchars($poste ?? '') ?></p>
-                <p><strong>Fonction:</strong> <?= htmlspecialchars($fonction ?? '') ?></p>
+                <p><strong>Nom:</strong> <?= htmlspecialchars($employe['nom'] ?? '') ?></p>
+                <p><strong>Prénom:</strong> <?= htmlspecialchars($employe['prenom'] ?? '') ?></p>
+                <p><strong>Sexe:</strong> <?= htmlspecialchars($employe['sexe'] ?? '') ?></p>
+                <p><strong>Email:</strong> <?= htmlspecialchars($employe['mail'] ?? '') ?></p>
+                <p><strong>Téléphone:</strong> <?= htmlspecialchars($employe['telephone'] ?? '') ?></p>
+                <p><strong>Date de Naissance:</strong> <?= htmlspecialchars($employe['date_naissance'] ?? '') ?></p>
+                <p><strong>Adresse:</strong> <?= htmlspecialchars($employe['adresse'] ?? '') ?></p>
             </div>
             <div class="col-md-6">
                 <h3>Informations du Contrat</h3>
-                <p><strong>Entreprise:</strong> <?= htmlspecialchars($nom_entreprise ?? '') ?></p>
-                <p><strong>Adresse Entreprise:</strong> <?= htmlspecialchars($adresse_entreprise ?? '') ?></p>
-                <p><strong>Salaire:</strong> <?= htmlspecialchars($salaire ?? '') ?> Ar</p>
-                <p><strong>Durée:</strong> <?= htmlspecialchars($duree_contrat ?? '') ?> mois</p>
-                <p><strong>Date de Début:</strong> <?= htmlspecialchars($date_debut ?? '') ?></p>
-                <p><strong>Date de Fin:</strong> <?= htmlspecialchars($date_fin ?? '') ?></p>
-                <p><strong>Heures de Travail:</strong> <?= htmlspecialchars($heures_travail ?? '') ?> heures/semaine</p>
-                <p><strong>Lieu:</strong> <?= htmlspecialchars($lieu ?? '') ?></p>
+                <p><strong>ID Contrat:</strong> <?= htmlspecialchars($contrat['id_contrat'] ?? '') ?></p>
+                <p><strong>Salaire:</strong> <?= htmlspecialchars($contrat['salaire'] ?? '') ?> Ar</p>
+                <p><strong>Date de Début:</strong> <?= htmlspecialchars($contrat['date_debut'] ?? '') ?></p>
+                <p><strong>Date de Fin:</strong> <?= htmlspecialchars($contrat['date_fin'] ?? 'Indéterminée') ?></p>
             </div>
         </div>
         <div class="mt-4">
-            <a href="/contrat-essai/export-pdf" class="btn btn-primary">Générer PDF</a>
+            <a href="/contrat/export-pdf?id_contrat=<?= $contrat['id_contrat'] ?>" class="btn btn-primary">Générer PDF</a>
             <a href="/rh/menu_employe" class="btn btn-secondary">Retour au menu</a>
         </div>
     </div>

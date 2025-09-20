@@ -108,13 +108,25 @@ $router->get('/rh/recrutement/entretiens', [ $RecrutementController, 'afficherEn
 $ContratEssaiController = new ContratEssaiController();
 $router->get('/contrat-essai', [ $ContratEssaiController, 'showForm' ]);
 $router->post('/contrat-essai/submit', [ $ContratEssaiController, 'submitForm' ]);
-$router->get('/contrat-essai/export-pdf', [ $ContratEssaiController, 'exportPdf']);
+// $router->get('/contrat/export-pdf', function() {
+//     $id_contrat = Flight::request()->query['id_contrat'] ?? null;
+//     if (!$id_contrat) {
+//         Flight::halt(400, 'ID contrat manquant');
+//         return;
+//     }
+//     $controller = new EmployeController();
+//     $controller->exportContratPdf($id_contrat);
+// });
 
 $EmployeController = new EmployeController();
 $router->get('/rh/menu_employe', [$EmployeController, 'showMenu']);
 $router->get('/rh/menu_employe/employes-contrat', [$EmployeController, 'listeEmployeSousContrat']);
 $router->get('/rh/menu_employe/employes-contrat-essai', [$EmployeController, 'listeEmployeSousContratEssai']);
 $router->get('/rh/employe-essai/embaucher/@id', [$EmployeController, 'embaucherEmploye']);
+$router->get('/rh/contrat/export-pdf/@id_contrat', [ $EmployeController, 'exportContratPdf' ]);
+$router->get('/rh/contrat/@id_contrat', [ $EmployeController, 'showContrat' ]);
+
+// ...existing code...
 
 $FiltrageController = new FiltrageController();
 $router->get('/rh/recrutement/candidats-non-retenus', [ $FiltrageController, 'afficherCandidatsNonRetenus' ]);

@@ -78,5 +78,15 @@ class EmployeModel {
         ]);
     }
 
-    
+    public function getContratById($id_contrat) {
+        $stmt = $this->db->prepare("SELECT * FROM contrat WHERE id_contrat = :id_contrat");
+        $stmt->execute([':id_contrat' => $id_contrat]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getEmployeById($id_employe) {
+        $stmt = $this->db->prepare("SELECT * FROM employe WHERE id_employe = :id_employe");
+        $stmt->execute([':id_employe' => $id_employe]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
