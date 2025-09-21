@@ -152,28 +152,9 @@
             color: var(--light-text-color);
         }
     </style>
-<script>
-        function setFonctionAndRedirect(id_fonction, id_annonce) {
-            fetch('/set_fonction', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'id_fonction=' + encodeURIComponent(id_fonction)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = '/postuler/' + id_annonce;
-                } else {
-                    alert('Erreur lors de la définition de la fonction : ' + (data.error || 'Erreur inconnue'));
-                }
-            })
-            .catch(error => {
-                alert('Erreur : ' + error.message);
-            });
-        }
-    </script>
 </head>
 <body>
+
     <div class="container">
         <div class="page-header">
             <h1>Nos Offres d'Emploi</h1>
@@ -199,7 +180,7 @@
                         </div>
 
                         <div class="annonce-footer">
-                            <button onclick="setFonctionAndRedirect(<?php echo $annonce['id_fonction']; ?>, <?php echo $annonce['id_annonce']; ?>)">Postuler</button>
+                            <button onclick="window.location.href='/postuler/<?php echo $annonce['id_annonce']; ?>'">Postuler</button>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -208,5 +189,6 @@
             <p class="no-annonces">Aucune annonce n'est disponible pour le moment. Revenez bientôt !</p>
         <?php endif; ?>
     </div>
+
 </body>
 </html>
