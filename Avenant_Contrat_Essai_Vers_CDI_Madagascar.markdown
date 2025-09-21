@@ -1,4 +1,4 @@
-# Avenant au Contrat d’Engagement à l’Essai - Passage à un CDI
+# Avenant au Contrat d’Engagement à l’Essai - Passage à un Contrat de travail
 
 **AVENANT AU CONTRAT D’ENGAGEMENT À L’ESSAI**
 

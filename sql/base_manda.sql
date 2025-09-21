@@ -63,8 +63,8 @@ create table variable (
    date_changement date
 );
 
-alter table annonce add column id_fonction int;
-alter table annonce add FOREIGN key (id_fonction) REFERENCES fonction(id_fonction);
+/* alter table annonce add column id_fonction int;
+alter table annonce add FOREIGN key (id_fonction) REFERENCES fonction(id_fonction); */
 
 -- alter table question add FOREIGN key (id_fonction) REFERENCES fonction(id_fonction);
 -- alter table choix add FOREIGN key (id_question) REFERENCES question(id_question);

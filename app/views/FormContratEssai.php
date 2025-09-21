@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contrat d'Essai</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Animations uniquement */
+/* Animations uniquement */
         .form-step {
             display: none;
             animation: fadeIn 0.5s ease-in-out;
@@ -37,9 +38,50 @@
             background-color: #0d6efd;
             transition: width 0.3s ease;
         }
+
+        h2{
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #343a40;
+        }
     </style>
 </head>
 <body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Gestion d'entreprise</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rh/dashboard">Tableau de bord</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rh/menu_employe">Gestion des employés</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rh/recrutement">Recrutement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contrats</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="nav-link">Connecté en tant que <?= $_SESSION['utilisateur']['nom_utilisateur'] ?? 'Utilisateur' ?></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Déconnexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
@@ -70,14 +112,14 @@
                                 
                                 <div class="mb-4">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="nom_entreprise" name="nom_entreprise" placeholder="Nom de l'entreprise" required>
+                                        <input type="text" class="form-control" id="nom_entreprise" name="nom_entreprise" placeholder="Nom de l'entreprise" value="SARL TANA SERVICES" required>
                                         <label for="nom_entreprise" class="fw-semibold">Nom de l'entreprise *</label>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-4">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="adresse_entreprise" name="adresse_entreprise" placeholder="Adresse de l'entreprise" required>
+                                        <input type="text" class="form-control" id="adresse_entreprise" name="adresse_entreprise" placeholder="Adresse de l'entreprise" value="Lot II M 45, Antananarivo 101, Madagascar" required>
                                         <label for="adresse_entreprise" class="fw-semibold">Adresse de l'entreprise *</label>
                                     </div>
                                 </div>
@@ -85,13 +127,13 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="nif" name="nif" placeholder="NIF" required>
+                                            <input type="text" class="form-control" id="nif" name="nif" placeholder="NIF" value="1234567890 " required>
                                             <label for="nif" class="fw-semibold">NIF *</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="stat" name="stat" placeholder="STAT" required>
+                                            <input type="text" class="form-control" id="stat" name="stat" placeholder="STAT" value="82901 11 2020 0 12345" required>
                                             <label for="stat" class="fw-semibold">STAT *</label>
                                         </div>
                                     </div>
@@ -99,7 +141,7 @@
                                 
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="directeur_general" name="directeur_general" placeholder="Directeur général" required>
+                                        <input type="text" class="form-control" id="directeur_general" name="directeur_general" placeholder="Directeur général" value="RAKOTONIRINA Sophie" required>
                                         <label for="directeur_general" class="fw-semibold">Directeur général *</label>
                                     </div>
                                 </div>
@@ -124,7 +166,6 @@
                                                 <option value="2">2 mois</option>
                                                 <option value="3">3 mois</option>
                                                 <option value="6">6 mois</option>
-                                                <option value="12">12 mois</option>
                                             </select>
                                             <label for="duree_contrat" class="fw-semibold">Durée du contrat (mois) *</label>
                                         </div>
@@ -196,8 +237,8 @@
                                 
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="lieu" name="lieu" placeholder="Ex: Antananarivo" required>
-                                        <label for="lieu" class="fw-semibold">Lieu (fait à) *</label>
+                                        <input type="text" class="form-control" id="lieu" name="lieu" placeholder="Ex: Antananarivo" value="Antananarivo" required>
+                                        <label for="lieu" class="fw-semibold">Lieu</label>
                                     </div>
                                 </div>
                             </div>
@@ -212,10 +253,7 @@
                                     Suivant →
                                 </button>
                                 <button type="submit" class="btn btn-success btn-md fw-semibold" id="submitBtn" style="display: none;">
-                                    ✓ Créer le contrat
-                                </button>
-                                <button type="submit" class="btn btn-primary btn-md fw-semibold" name="export_pdf" value="1" id="submitPdfBtn" style="display: block;">
-                                    Créer et télécharger PDF
+                                    Valider
                                 </button>
                             </div>
                         </form>

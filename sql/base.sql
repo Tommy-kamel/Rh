@@ -28,10 +28,12 @@ CREATE TABLE user (
 
 CREATE TABLE annonce (
     id_annonce INT PRIMARY KEY AUTO_INCREMENT,
-    id_critere INT,
-    date_depot_limite DATE,
     poste_voulu VARCHAR(50),
-    FOREIGN KEY (id_critere) REFERENCES criteres(id_critere)
+    date_depot_limite DATE,
+    id_critere INT,
+    id_fonction INT,
+    FOREIGN KEY (id_critere) REFERENCES criteres(id_critere),
+    FOREIGN KEY (id_fonction) REFERENCES fonction(id_fonction)
 );
 
 CREATE TABLE employe (
@@ -48,6 +50,7 @@ CREATE TABLE employe (
 CREATE TABLE contrat (
     id_contrat INT PRIMARY KEY AUTO_INCREMENT,
     id_employe INT,
+    -- id_candidat_retenu INT,
     salaire DECIMAL(15,2),
     date_debut DATE,
     date_fin DATE
