@@ -198,15 +198,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <select class="form-select" id="diplome_requis" name="diplome_requis">
-                                            <option value="">Sélectionner un diplôme</option>
-                                            <option value="CEPE">CEPE</option>
-                                            <option value="BEPC">BEPC</option>
-                                            <option value="BACC">BACC</option>
-                                            <option value="LICENCE">LICENCE</option>
-                                            <option value="MASTER">MASTER</option>
-                                            <option value="DOCTORAT">DOCTORAT</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="diplome_requis" name="diplome_requis" placeholder="Ex: Master en Informatique">
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label">Niveau d'exigence</label>

@@ -138,7 +138,7 @@
                             <td><?php echo htmlspecialchars($candidat['sexe']); ?></td>
                             <?php if ($filtre == 'retenus'): ?>
                                 <td><?php echo htmlspecialchars($candidat['date_creation']); ?></td>
-                                <td><?php echo htmlspecialchars($candidat['score_total']); ?></td>
+                                <td><?php echo htmlspecialchars($candidat['score']); ?></td>
                             <?php else: ?>
                                 <td><?php echo htmlspecialchars($candidat['date_candidature']); ?></td>
                             <?php endif; ?>

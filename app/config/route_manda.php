@@ -86,4 +86,10 @@ Flight::route('GET /liste_candidat', function() {
     $controller->afficherListeCandidats();
 });
 
+Flight::route('GET /liste_candidats_scoring', function() {
+    $pdo = new PDO('mysql:host=localhost;dbname=rh', 'root', ''); // Ajuster
+    $controller = new MandaController($pdo);
+    $controller->afficherCandidatsWithScore();
+});
+
 ?>

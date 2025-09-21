@@ -122,6 +122,23 @@ INSERT INTO choix (id_question, texte, est_correct) VALUES
 (25,'Attirer et sélectionner les meilleurs candidats', TRUE),(25,'Vendre des produits', FALSE),(25,'Réparer les machines', FALSE),(25,'Acheter des immobilisations', FALSE),
 (25,'Sécuriser l\’entrepôt', FALSE),(25,'Établir des factures', FALSE),(25,'Stocker des marchandises', FALSE),(25,'Former des clients', FALSE);
 
+INSERT INTO choix (id_question, texte, est_correct) VALUES
+(26,'Gestion Prévisionnelle des Emplois et Compétences', TRUE),(26,'Gestion des Produits en Cours', FALSE),(26,'Grande Politique Économique Commerciale', FALSE),(26,'Gestion des Postes en Contrat', FALSE),
+(26,'Gestion Prévisionnelle des Entreprises Commerciales', FALSE),(26,'Groupe Professionnel des Employés et Cadres', FALSE),(26,'Gestion des Patrimoines et Capitaux', FALSE),(26,'Gestion Prévisionnelle des Étudiants en CDD', FALSE),
+
+(27,'275 heures', TRUE),(27,'20 heures', FALSE),(27,'427 heures', FALSE),(27,'10 heures', FALSE),
+(27,'50 heures', FALSE),(27,'25 heures', FALSE),(27,'60 heures', FALSE),(27,'15 heures', FALSE),
+
+(28,'Établir les bulletins de salaire', TRUE),(28,'Former les salariés', FALSE),(28,'Faire des ventes', FALSE),(28,'Surveiller la sécurité', FALSE),
+(28,'Produire des biens', FALSE),(28,'Gérer les stocks', FALSE),(28,'Entretenir les machines', FALSE),(28,'Vérifier la conformité des produits', FALSE),
+
+(29,'Attirer et sélectionner les meilleurs candidats', TRUE),(29,'Vendre des produits', FALSE),(29,'Réparer les machines', FALSE),(29,'Acheter des immobilisations', FALSE),
+(29,'Sécuriser l\’entrepôt', FALSE),(29,'Établir des factures', FALSE),(29,'Stocker des marchandises', FALSE),(29,'Former des clients', FALSE),
+
+(30,'Gestion du personnel', TRUE),(30,'Production de biens', FALSE),(30,'Achat de machines', FALSE),(30,'Sécurité informatique', FALSE),
+(30,'Gestion de stock', FALSE),(30,'Vente de produits', FALSE),(30,'Immobilisation des actifs', FALSE),(30,'Comptabilité financière', FALSE);
+
+
 -- INSERT INTO annonce (id_critere, date_depot_limite, poste_voulu) VALUES
 -- (1, '2025-12-31', 'Développeur Web');
 

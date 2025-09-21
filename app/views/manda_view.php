@@ -93,9 +93,7 @@
         <?php foreach ($question['choices'] as $choice): ?>
             <label>
                 <input type="radio" name="id_choix" value="<?= $choice['id'] ?>" required>
-                <?= htmlspecialchars($choice['texte'] ?? 'Choix non défini') ?>
                 <?= htmlspecialchars($choice['est_correct'] ?? 'Choix non défini') ?>
-                
             </label><br>
         <?php endforeach; ?>
 

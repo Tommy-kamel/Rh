@@ -61,7 +61,7 @@
         <div class="success">
             Félicitations ! Votre candidature a été soumise et vous avez été retenu(e) pour l'annonce.
         </div>
-        appuiez ici pour <a href="/test/<?=$_SESSION["id_fonction"] ?>">poursuivre</a>
+        appuiez ici pour <a href="/test/<?=$_SESSION['id_fonction'] ?>">poursuivre</a>
     </div>
     <script src="/js/bootstrap.bundle.min.js"></script>
 </body>

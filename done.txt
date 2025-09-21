@@ -1,0 +1,24 @@
+ilay session(candidat) ao anaty starttest fafana, avy any am classement we afaka manohy sa tsia
+ilay session(fonction) ao anaty planentretien fafana, avy any am choix fonction
+
+mila ovaina ny base:
+    _ampiana poste amizay select ny poste rehetra
+    _ovaina ny base question fa tsy atao par fonction tsony fa atao par poste
+
+ny verification ao anaty planentretien atao par poste fa tsy par fonction
+mila verification ana date ilay manao entretien
+mila ampiana date manao date ho anilay entertient rehefa valider ny test (date apetraky ny recruteur -> misy liste anireo tafavoaka tam test ao am recruteur)
+
+liste personne qui on passer le test avec bouton makany am entretien
+
+
+
+
+liste des fonctions: /liste_fonctions
+
+manao entretien: /liste_fonctions -> liste candidat -> faire entretien
+
+modification du pourcentage du systeme de scoring: /modifier_pourcentages
+
+CRUD liste des questions QCM d une fonction: /liste_fonctions -> modifier les questions
+

@@ -25,4 +25,3 @@ INSERT INTO user (id_fonction,nom_utilisateur, mot_de_passe) VALUES
 (5,'immobilisation_user', 'IMMO');
 
 
-

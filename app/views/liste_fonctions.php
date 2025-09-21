@@ -44,6 +44,7 @@
                 <p><strong>Nom:</strong> <?= htmlspecialchars($fonction['nom_fonction']) ?></p>
                 <button class="action-button" onclick="setFonctionAndRedirect(<?= $fonction['id_fonction'] ?>, '/question_test')">Modifier les Questions</button>
                 <button class="entretien-button" onclick="setFonctionAndRedirect(<?= $fonction['id_fonction'] ?>, '/liste_candidat')">voir la liste des candidats</button>
+                <button class="action-button" onclick="setFonctionAndRedirect(<?= $fonction['id_fonction'] ?>, '/liste_candidats_scoring')">voir la liste qui ont passer l entretien</button>
             </div>
         <?php endforeach; ?>
         <a href="/annonces">Retour à l'accueil</a>

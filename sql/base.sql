@@ -38,7 +38,6 @@ CREATE TABLE employe (
     id_employe INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(50),
     prenom VARCHAR(50),
-    sexe VARCHAR(50),
     mail VARCHAR(50),
     telephone VARCHAR(50),
     date_naissance DATE,
@@ -77,6 +76,15 @@ CREATE TABLE poste (
     FOREIGN KEY(id_fonction) REFERENCES fonction(id_fonction)
 );  
 
+CREATE TABLE contrat_essai (
+    id_contrat_essai INT PRIMARY KEY AUTO_INCREMENT,
+    id_employe INT,
+    date_debut DATE,
+    date_fin DATE,
+    salaire DECIMAL(15,2),
+    FOREIGN KEY(id_employe) REFERENCES employe(id_employe)
+);
+
 CREATE TABLE niveau_exigence (
     id_niveau_exigence INT PRIMARY KEY AUTO_INCREMENT,
     id_annonce INT,
@@ -86,7 +94,7 @@ CREATE TABLE niveau_exigence (
 );
 
 CREATE TABLE candidat_retenu (
-    id_candidat_retenu INT PRIMARY KEY AUTO_INCREMENT,
+    id_cv INT PRIMARY KEY AUTO_INCREMENT,
     id_candidat INT,
     nom VARCHAR(50),
     prenom VARCHAR(50),
@@ -100,14 +108,4 @@ CREATE TABLE candidat_retenu (
     photo VARCHAR(255),
     date_creation DATE,
     FOREIGN KEY (id_candidat) REFERENCES candidat(id_candidat) ON DELETE CASCADE
-);
-
-CREATE TABLE contrat_essai (
-    id_contrat_essai INT PRIMARY KEY AUTO_INCREMENT,
-/*     id_employe INT, */
-    id_candidat_retenu INT,
-    date_debut DATE,
-    date_fin DATE,
-    salaire DECIMAL(15,2),
-    FOREIGN KEY(id_candidat_retenu) REFERENCES candidat_retenu(id_candidat_retenu)
 );
