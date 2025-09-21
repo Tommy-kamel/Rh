@@ -12,7 +12,7 @@ class EmployeModel {
         $this->db = $db;
     }
 
-    // Mila atambatra am contrat
+    
     public function getAllEmployesSousContrat() {
         $stmt = $this->db->prepare("SELECT e.*, c.* FROM employe e JOIN contrat c ON e.id_employe = c.id_employe WHERE c.date_fin IS NULL");
         $stmt->execute();
@@ -154,7 +154,7 @@ class EmployeModel {
             $sql .= " AND c.salaire <= :salaire_max";
             $params[':salaire_max'] = $filters['salaire_max'];
         }
-
+        
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

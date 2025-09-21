@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Candidats</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="/css/custom.css" rel="stylesheet"> -->
 </head>
 <body>
     <div class="container mt-4">
@@ -55,54 +56,45 @@
                     <label for="sexe" class="form-label">Sexe</label>
                     <select id="sexe" name="sexe" class="form-select">
                         <option value="">Tous</option>
-                        <option value="Homme" <?php echo isset($_GET['sexe']) && $_GET['sexe'] == 'Homme' ? 'selected' : ''; ?>>Homme</option>
-                        <option value="Femme" <?php echo isset($_GET['sexe']) && $_GET['sexe'] == 'Femme' ? 'selected' : ''; ?>>Femme</option>
-                        <option value="Autre" <?php echo isset($_GET['sexe']) && $_GET['sexe'] == 'Autre' ? 'selected' : ''; ?>>Autre</option>
+                        <option value="Homme" <?php echo isset($_GET['sexe']) && $_GET['sexe'] == 'Homme' ? 'selected' : ''; ?>>Masculin</option>
+                        <option value="Femme" <?php echo isset($_GET['sexe']) && $_GET['sexe'] == 'Femme' ? 'selected' : ''; ?>>Féminin</option>
                     </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="date_candidature" class="form-label">Date de Candidature</label>
-                    <input type="date" id="date_candidature" name="date_candidature" class="form-control" value="<?php echo isset($_GET['date_candidature']) ? htmlspecialchars($_GET['date_candidature']) : ''; ?>">
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary mt-3">Rechercher</button>
                 </div>
+                <!-- Filtres existants -->
                 <div class="col-md-4">
-                    <label for="filtre" class="form-label">Filtre :</label>
+                    <label for="filtre" class="form-label">Filtrer par :</label>
                     <select id="filtre" name="filtre" class="form-select" onchange="this.form.submit()">
                         <option value="retenus" <?php echo $filtre == 'retenus' ? 'selected' : ''; ?>>Retenus</option>
-                        <option value="non_retenus" <?php echo $filtre == 'non_retenus' ? 'selected' : ''; ?>>Non Retenus</option>
+                        <option value="non_retenus" <?php echo $filtre == 'non_retenus' ? 'selected' : ''; ?>>Non retenus</option>
                     </select>
                 </div>
-                <!-- Tri -->
                 <div class="col-md-4">
                     <label for="tri" class="form-label">Trier par :</label>
                     <select id="tri" name="tri" class="form-select" onchange="this.form.submit()">
-                        <option value="age" <?php echo isset($_GET['tri']) && $_GET['tri'] == 'age' ? 'selected' : ''; ?>>Âge</option>
-                        <option value="diplome" <?php echo isset($_GET['tri']) && $_GET['tri'] == 'diplome' ? 'selected' : ''; ?>>Diplôme</option>
-                        <option value="experience" <?php echo isset($_GET['tri']) && $_GET['tri'] == 'experience' ? 'selected' : ''; ?>>Expérience</option>
-
-                        <?php if ($filtre == 'retenus'): ?>
-                            <option value="score" <?php echo isset($_GET['tri']) && $_GET['tri'] == 'score' ? 'selected' : ''; ?>>Score</option>
-                        <?php else: ?>
-                            
-                        <?php endif; ?>
-                        
+                        <option value="age" <?php echo $tri == 'age' ? 'selected' : ''; ?>>Âge</option>
+                        <option value="diplome" <?php echo $tri == 'diplome' ? 'selected' : ''; ?>>Diplôme</option>
+                        <option value="experience" <?php echo $tri == 'experience' ? 'selected' : ''; ?>>Expérience</option>
+                            <?php if ($filtre == 'retenus'): ?>
+                                <option value="score" <?php echo $tri == 'score' ? 'selected' : ''; ?>>Score</option>
+                            <?php else: ?>
+                                
+                            <?php endif; ?>
                     </select>
                 </div>
-                <!-- Filtre -->
-
             </form>
         </div>
 
         <?php if (empty($candidats)): ?>
-            <div class="alert alert-info">Aucun candidat trouvé.</div>
+            <div class="alert alert-info">Aucun candidat <?php echo $filtre == 'retenus' ? 'retenu' : 'non retenu'; ?>.</div>
         <?php else: ?>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Photo</th>
-                        <th>ID</th>
+                
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Email</th>
@@ -125,7 +117,7 @@
                     <?php foreach ($candidats as $candidat): ?>
                         <tr>
                             <td><img src="<?php echo htmlspecialchars($candidat['photo'] ? $candidat['photo'] : '/images/default.jpg'); ?>" alt="Photo du candidat" width="60" height="60"></td>
-                            <td><?php echo htmlspecialchars($candidat['id_candidat']); ?></td>
+                            
                             <td><?php echo htmlspecialchars($candidat['nom']); ?></td>
                             <td><?php echo htmlspecialchars($candidat['prenom']); ?></td>
                             <td><?php echo htmlspecialchars($candidat['mail']); ?></td>
@@ -138,7 +130,7 @@
                             <td><?php echo htmlspecialchars($candidat['sexe']); ?></td>
                             <?php if ($filtre == 'retenus'): ?>
                                 <td><?php echo htmlspecialchars($candidat['date_creation']); ?></td>
-                                <td><?php echo htmlspecialchars($candidat['score_total']); ?></td>
+                                <td><?php echo htmlspecialchars($candidat['score'] ?? 0); ?></td>
                             <?php else: ?>
                                 <td><?php echo htmlspecialchars($candidat['date_candidature']); ?></td>
                             <?php endif; ?>

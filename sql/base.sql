@@ -50,6 +50,7 @@ CREATE TABLE employe (
 CREATE TABLE contrat (
     id_contrat INT PRIMARY KEY AUTO_INCREMENT,
     id_employe INT,
+    -- id_candidat_retenu INT,
     salaire DECIMAL(15,2),
     date_debut DATE,
     date_fin DATE
