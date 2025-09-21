@@ -39,7 +39,7 @@ class UtilisateurController {
             $_SESSION['utilisateur'] = [
                 'id' => $utilisateur['id_user'],
                 'nom_utilisateur' => $utilisateur['nom_utilisateur'],
-                'fonction' => $fonction['nom_fonction']
+                'fonction' => $fonction['nom_fonction'],
             ];
             
             // Redirection selon la fonction de l'utilisateur

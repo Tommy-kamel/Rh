@@ -257,11 +257,11 @@ class FiltrageModel {
         ));
 
         // Insérer un score par défaut dans scoring
-        /* $stmt = $this->db->prepare("
-            INSERT INTO scoring (id_candidat, score_total)
-            VALUES (?, 0)
-        ");
-        $stmt->execute([$candidat['id_candidat']]); */
+        // $stmt = $this->db->prepare("
+        //     INSERT INTO scoring (id_candidat, score_total)
+        //     VALUES (?, 0)
+        // ");
+        // $stmt->execute([$candidat['id_candidat']]);
     }
 }
 ?>

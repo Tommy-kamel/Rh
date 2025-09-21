@@ -7,13 +7,12 @@ use app\controllers\PostulerController;
 use app\controllers\UtilisateurController;
 use app\controllers\HomeController;
 use app\controllers\RecrutementController;
-use app\controllers\ContratEssaiController;
 use app\controllers\FiltrageController;
+
 use flight\Engine;
 use flight\net\Router;
 
 require_once 'route_manda.php';
-
 //use Flight;
 
 /** 
@@ -28,17 +27,10 @@ require_once 'route_manda.php';
 session_start();
 $Annonce_Controller = new AnnonceController();
 $router->get('/annonces', [$Annonce_Controller, 'getAnnonces']);
-$router->get('/rh/annonces/creer', [$Annonce_Controller, 'afficherFormAnnonce']);
-$router->post('/rh/annonces/creer', [$Annonce_Controller, 'creerAnnonce']);
-
-$router->get('/confirmation', function() {
-    Flight::render('confirmation');
-});
 
 $Postuler_Controller = new PostulerController();
 $router->get('/postuler/@id', [$Postuler_Controller, 'formPostuler']);
 $router->post('/postuler/submit', [$Postuler_Controller, 'submitPostuler']);
-$router->get('/rh/recrutement/candidatures', [ $Postuler_Controller, 'afficherCandidatures' ]);
 
 $UtilisateurController = new UtilisateurController();
 $router->get('/login', [ $UtilisateurController, 'afficherLogin' ]);
@@ -97,17 +89,6 @@ $router->get('/immobilisation/dashboard', function() {
 
 $RecrutementController = new RecrutementController();
 $router->get('/rh/recrutement', [ $RecrutementController, 'afficherMenuRecrutement' ]);
-    
-// Routes pour la gestion des candidatures
-$router->get('/rh/recrutement/candidatures', [ $RecrutementController, 'afficherCandidatures' ]);   
-// Routes pour la gestion des entretiens
-$router->get('/rh/recrutement/entretiens', [ $RecrutementController, 'afficherEntretiens' ]);
-
-
-$ContratEssaiController = new ContratEssaiController();
-$router->get('/contrat-essai', [ $ContratEssaiController, 'showForm' ]);
-$router->post('/contrat-essai/submit', [ $ContratEssaiController, 'submitForm' ]);
-$router->get('/contrat-essai/export-pdf', [ $ContratEssaiController, 'exportPdf']);
 
 $FiltrageController = new FiltrageController();
 $router->get('/rh/recrutement/candidats-non-retenus', [ $FiltrageController, 'afficherCandidatsNonRetenus' ]);

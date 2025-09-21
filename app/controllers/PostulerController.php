@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\PostulerModel;
 use app\models\FiltrageModel;
 use Flight;
+use Exception;
 
 class PostulerController {
     public function __construct() {
@@ -135,3 +136,4 @@ class PostulerController {
         Flight::render('rh/candidatures', ['candidatures' => $candidatures]);
     }
 }
+?>

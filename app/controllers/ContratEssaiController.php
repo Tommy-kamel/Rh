@@ -14,7 +14,7 @@ class ContratEssaiController{
         Flight::render('FormContratEssai');
     }
 
-    public function submitForm() { //MBOLA MILA INSERENA
+    public function submitForm() {
         $nom_entreprise = Flight::request()->data['nom_entreprise'] ?? null;
         $adresse_entreprise = Flight::request()->data['adresse_entreprise'] ?? null;
         $nif = Flight::request()->data['nif'] ?? null;

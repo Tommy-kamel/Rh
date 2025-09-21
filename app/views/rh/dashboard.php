@@ -52,7 +52,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Gestion des employés</h5>
                         <p class="card-text">Gérez les employés, consultez leurs informations et mettez à jour leurs dossiers.</p>
-                        <a href="/rh/menu_employe" class="btn btn-primary">Accéder</a>
+                        <a href="#" class="btn btn-primary">Accéder</a>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 </div>
             </div>
             
-            <!-- <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Contrats</h5>
@@ -75,7 +75,7 @@
                         <a href="#" class="btn btn-primary">Accéder</a>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
     

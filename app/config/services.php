@@ -9,7 +9,6 @@ use app\models\FrontModel;
 use app\models\AnnonceModel;
 use app\models\PostulerModel;
 use app\models\UtilisateurModel;
-use app\models\EmployeModel;
 use app\models\FiltrageModel;
 /** 
  * @var array $config This comes from the returned array at the bottom of the config.php file
@@ -51,15 +50,9 @@ Flight::map('UtilisateurModel', function () {
     return new UtilisateurModel(Flight::db());
 });
 
-Flight::map('EmployeModel', function () {
-    return new EmployeModel(Flight::db());
-});
-
 Flight::map('FiltrageModel', function () {
     return new FiltrageModel(Flight::db());
 });
-
-
 
 
 

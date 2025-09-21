@@ -2,6 +2,8 @@
 // manda_model.php
 namespace app\models;
 
+use Exception;
+
 class MandaModel {
     public $pdo;
 
@@ -67,16 +69,21 @@ class MandaModel {
         $stmt->execute(['id_question' => $id_question]);
         $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        // if (empty($results)) {
-        //     throw new Exception("Question ou choix non trouvés.");
-        // }
-
-        $question = [
-            'id' => $results[0]['id_question'],
-            'intitule' => $results[0]['intitule'] ?? 'Question non définie',
-            'duree_max' => $results[0]['duree_max'] ?? 60,
-            'choices' => []
-        ];
+        if (empty($results)) {
+    $question = [
+        'id' => 0,
+        'intitule' => 'Question non définie',
+        'duree_max' => 0,
+        'choices' => []
+    ];
+} else {
+    $question = [
+        'id' => $results[0]['id_question'],
+        'intitule' => $results[0]['intitule'] ?? 'Question non définie',
+        'duree_max' => $results[0]['duree_max'] ?? 60,
+        'choices' => []
+    ];
+}
 
         foreach ($results as $row) {
             if ($row['id_choix'] !== null) {
@@ -89,7 +96,7 @@ class MandaModel {
         }
 
         if (count($question['choices']) < 4) {
-            throw new Exception("Pas assez de choix valides pour la question ID $id_question.");
+            // throw new Exception("Pas assez de choix valides pour la question ID $id_question.");
         }
 
         shuffle($question['choices']);
@@ -311,6 +318,21 @@ public function getAllCandidatsWithScoring($id_fonction) {
         LEFT JOIN scoring s ON c.id_candidat = s.id_candidat AND s.id_fonction = :id_fonction
         JOIN annonce a ON c.id_annonce = a.id_annonce
         WHERE a.id_fonction = :id_fonction
+    ");
+    $stmt->execute(['id_fonction' => $id_fonction]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+public function getCandidatsWithScoreByFonction($id_fonction) {
+    $stmt = $this->pdo->prepare("
+        SELECT c.id_candidat, c.nom, c.prenom, c.mail, 
+               COALESCE(s.score_total, -1) AS score_total, 
+               s.decision
+        FROM candidat c
+        JOIN scoring s ON c.id_candidat = s.id_candidat AND s.id_fonction = :id_fonction
+        JOIN annonce a ON c.id_annonce = a.id_annonce
+        WHERE a.id_fonction = :id_fonction
+        ORDER BY c.nom, c.prenom
     ");
     $stmt->execute(['id_fonction' => $id_fonction]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
