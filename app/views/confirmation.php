@@ -40,7 +40,10 @@
             border-radius: 5px;
             margin-bottom: 20px;
             font-weight: bold;
+            font-size: 1.2em;
+            font-family: Poppins;
         }
+        
         a {
             display: inline-block;
             margin-top: 20px;

@@ -1,3 +1,4 @@
+
 <?php
 ?>
 <!DOCTYPE html>
@@ -26,6 +27,47 @@
             background-color: var(--light-bg);
             font-family: 'Poppins', sans-serif;
             color: #495057;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #5a6acf 100%) !important;
+            padding: 20px 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white !important;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 8px 16px !important;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .navbar-nav .nav-link:hover, 
+        .navbar-nav .nav-link.active {
+            color: white !important;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .user-info {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
         .candidat-card {
@@ -233,36 +275,59 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(25, 135, 84, 0.3);
         }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#" style="font-weight: 600;">Gestion d'entreprise</a>
+            <a class="navbar-brand" href="/">
+                <i data-feather="briefcase"></i>
+                SARL TANA SERVICES
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/rh/dashboard">Tableau de bord</a>
+                        <a class="nav-link" href="/rh/dashboard">
+                            <i data-feather="home"></i>
+                            Tableau de bord
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/rh/menu_employe">Gestion des employés</a>
+                        <a class="nav-link" href="/rh/menu-employe">
+                            <i data-feather="users"></i>
+                            Employés
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/rh/recrutement">Recrutement</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Évaluations</a>
+                        <a class="nav-link active" href="/rh/recrutement">
+                            <i data-feather="user-plus"></i>
+                            Recrutement
+                        </a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <span class="nav-link">Connecté en tant que <?= $_SESSION['utilisateur']['nom_utilisateur'] ?? 'Utilisateur' ?></span>
+                        <span class="nav-link user-info">
+                            <i data-feather="user"></i>
+                            <?= $_SESSION['utilisateur']['nom_utilisateur'] ?? 'Utilisateur' ?>
+                        </span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout">Déconnexion</a>
+                        <a class="nav-link" href="/logout">
+                            <i data-feather="log-out"></i>
+                            Déconnexion
+                        </a>
                     </li>
                 </ul>
             </div>

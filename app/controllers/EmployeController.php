@@ -50,7 +50,7 @@ class EmployeController{
         ];
 
         $listeEmployesEssai = Flight::EmployeModel()->getAllEmployesSousContratEssaiFiltered($filters);
-        Flight::render('rh/liste_employe_sous_contrat_essai', ['employesEssai' => $listeEmployesEssai, 'filters' => $filters]);
+        Flight::render('rh/liste_employe_sous_contrat_essai', ['employes' => $listeEmployesEssai, 'filters' => $filters]);
     }
     
 

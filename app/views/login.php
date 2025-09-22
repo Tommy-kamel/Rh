@@ -17,7 +17,7 @@
             margin: 100px auto;
             padding: 20px;
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .login-header {
@@ -52,12 +52,12 @@
             <form action="/login" method="post">
                 <div class="form-group mb-3">
                     <label for="nom_utilisateur">Nom d'utilisateur</label>
-                    <input type="text" class="form-control" id="nom_utilisateur" name="nom_utilisateur" required>
+                    <input type="text" class="form-control" id="nom_utilisateur" name="nom_utilisateur" value="rh_user" required>
                 </div>
                 
                 <div class="form-group mb-3">
                     <label for="mot_de_passe">Mot de passe</label>
-                    <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe" required>
+                    <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe" value="RH" required>
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-login mt-3">Se connecter</button>

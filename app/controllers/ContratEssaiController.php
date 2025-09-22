@@ -65,6 +65,7 @@ class ContratEssaiController{
         $date_debut = Flight::request()->data['date_debut'] ?? null;
         $date_fin = Flight::request()->data['date_fin'] ?? null;
         $salaire = Flight::request()->data['salaire'] ?? null;
+        // $lieu_naissance = "Antananarivo"; // A modifier plus tard
 
         $errors = [];
 
@@ -95,7 +96,8 @@ class ContratEssaiController{
                 'heure_fin_apres_midi' => Flight::request()->data['heure_fin_apres_midi'] ?? null,
                 'date_naissance' => $date_naissance,
                 'cin' => $candidat_retenu['cin'] ?? '',
-                'date_signature' => date('d/m/Y')
+                'date_signature' => date('d/m/Y'),
+                // 'lieu_naissance' => $lieu_naissance
             ];
             $_SESSION['contrat'] = $contratData; 
             $id_contrat_essai = Flight::EmployeModel()->creerContratEssai($candidat_retenu['id_candidat_retenu'], $salaire, $date_debut);

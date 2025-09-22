@@ -1,280 +1,645 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrat d'Essai</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Contrat d'Essai - SARL TANA SERVICES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
     <style>
-/* Animations uniquement */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #212529;
+            --light-text-color: #6c757d;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --success-color: #198754;
+            --warning-color: #fd7e14;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #5a6acf 100%);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .user-info {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .form-card {
+            background: var(--card-background);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), #5a6acf);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #5a6acf 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .card-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: white;
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .card-body {
+            padding: 50px 40px;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-success {
+            background: rgba(25, 135, 84, 0.1);
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
+        }
+
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+            border-left: 4px solid var(--danger-color);
+        }
+
         .form-step {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
         }
         
         .form-step.active {
             display: block;
+            animation: fadeInUp 0.3s ease-out;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Animation focus (Bootstrap n'a pas) */
-        .form-floating input:focus, .form-floating select:focus {
-            transform: scale(1.01);
-            transition: transform 0.2s ease;
-        }
-        
-        .form-floating input:not(:focus), .form-floating select:not(:focus) {
-            transform: scale(1);
-            transition: transform 0.2s ease;
-        }
-        
-        /* Custom progress bar color */
-        .progress-bar-custom {
-            background-color: #0d6efd;
-            transition: width 0.3s ease;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        h2{
-            font-family: 'Poppins', sans-serif;
+        .step-title {
+            font-size: 1.8rem;
             font-weight: 600;
-            color: #343a40;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            display: block;
+            font-size: 1rem;
+        }
+
+        .form-control {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        .form-control.is-invalid {
+            border-color: var(--danger-color);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .time-section {
+            background: var(--background-color);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .time-section h5 {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #5a6acf);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0b5ed7, #4c63d2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(13, 110, 253, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color), #20c997);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #157347, #198754);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(25, 135, 84, 0.3);
+        }
+
+        .button-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .required {
+            color: var(--danger-color);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .card-header {
+                padding: 30px 20px;
+            }
+
+            .card-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .card-body {
+                padding: 30px 20px;
+            }
+
+            .step-title {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+            }
+
+            .form-grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .time-section {
+                padding: 20px;
+            }
+
+            .button-navigation {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
-<body class="bg-light">
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">Gestion d'entreprise</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/rh/dashboard">Tableau de bord</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/rh/menu_employe">Gestion des employés</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/rh/recrutement">Recrutement</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contrats</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <span class="nav-link">Connecté en tant que <?= $_SESSION['utilisateur']['nom_utilisateur'] ?? 'Utilisateur' ?></span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Déconnexion</a>
-                    </li>
-                </ul>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">
+                <i data-feather="briefcase"></i>
+                SARL TANA SERVICES
+            </a>
+            <div class="navbar-nav">
+                <a href="/rh/dashboard" class="nav-link">
+                    <i data-feather="home"></i>
+                    Dashboard
+                </a>
+                <a href="/rh/menu-employe" class="nav-link">
+                    <i data-feather="users"></i>
+                    Employés
+                </a>
+                <a href="/rh/recrutement" class="nav-link">
+                    <i data-feather="user-plus"></i>
+                    Recrutement
+                </a>
+                <a href="#" class="nav-link active">
+                    <i data-feather="file-text"></i>
+                    Contrats
+                </a>
+                <span class="user-info">
+                    <i data-feather="user"></i>
+                    <?= $_SESSION['utilisateur']['nom_utilisateur'] ?? 'Utilisateur' ?>
+                </span>
+                <a href="/logout" class="nav-link">
+                    <i data-feather="log-out"></i>
+                    Déconnexion
+                </a>
             </div>
         </div>
     </nav>
 
-
-    <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
-                <div class="card shadow border-0">
-                    <!-- Header avec progress bar -->
-                    <div class="bg-dark text-white p-4 rounded-top">
-                        <div class="text-center">
-                            <h1 class="h2 fw-bold mb-2">Contrat d'Essai</h1>
-                            <p class="mb-3 opacity-75">Création d'un nouveau contrat d'essai</p>
-                            <div class="progress" style="height: 3px;">
-                                <div class="progress-bar progress-bar-custom" id="progressBar" role="progressbar" style="width: 0%"></div>
+    <div class="container">
+        <div class="form-card">
+            <div class="card-header">
+                <h1>Contrat d'Essai</h1>
+                <p>Création d'un nouveau contrat d'essai pour un candidat sélectionné</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar" style="width: 33.33%;">Étape 1/3</div>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <?php if (!empty($message)): ?>
+                    <div class="alert <?php echo $message_type == 'success' ? 'alert-success' : 'alert-danger'; ?>">
+                        <i data-feather="<?php echo $message_type == 'success' ? 'check-circle' : 'alert-circle'; ?>"></i>
+                        <?php echo htmlspecialchars($message); ?>
+                    </div>
+                <?php endif; ?>
+                
+                <form action="/contrat-essai/submit" method="POST" id="contratForm">
+                    <?php if (!empty($id_candidat)): ?>
+                        <input type="hidden" name="id_candidat" value="<?= htmlspecialchars($id_candidat ?? '') ?>">
+                    <?php endif; ?>
+                    
+                    <!-- Étape 1: Informations de l'entreprise -->
+                    <div class="form-step active" data-step="1">
+                        <h2 class="step-title">
+                            <i data-feather="building"></i>
+                            Informations de l'entreprise
+                        </h2>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="nom_entreprise" class="form-label">
+                                    Nom de l'entreprise <span class="required">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="nom_entreprise" name="nom_entreprise" 
+                                       value="SARL TANA SERVICES" required placeholder="Nom de l'entreprise">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="adresse_entreprise" class="form-label">
+                                    Adresse de l'entreprise <span class="required">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="adresse_entreprise" name="adresse_entreprise" 
+                                       value="Lot II M 45, Antananarivo 101, Madagascar" required placeholder="Adresse complète">
+                            </div>
+                            
+                            <div class="form-grid form-grid-2">
+                                <div class="form-group">
+                                    <label for="nif" class="form-label">
+                                        NIF <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="nif" name="nif" 
+                                           value="1234567890" required placeholder="Numéro d'identification fiscale">
+                                </div>
+                                <div class="form-group">
+                                    <label for="stat" class="form-label">
+                                        STAT <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="stat" name="stat" 
+                                           value="82901 11 2020 0 12345" required placeholder="Numéro statistique">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="directeur_general" class="form-label">
+                                    Directeur général <span class="required">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="directeur_general" name="directeur_general" 
+                                       value="RAKOTONIRINA Sophie" required placeholder="Nom du directeur général">
                             </div>
                         </div>
                     </div>
                     
-                    <div class="card-body p-4 p-md-5">
-                        <?php if (!empty($message)): ?>
-                            <div class="alert <?php echo $message_type == 'success' ? 'alert-success' : 'alert-danger'; ?> alert-dismissible fade show" role="alert">
-                                <?php echo htmlspecialchars($message); ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        <?php endif; ?>
+                    <!-- Étape 2: Conditions du contrat -->
+                    <div class="form-step" data-step="2">
+                        <h2 class="step-title">
+                            <i data-feather="dollar-sign"></i>
+                            Conditions du contrat
+                        </h2>
                         
-                        <form action="/contrat-essai/submit" method="POST" id="contratForm">
-                            <?php if (!empty($id_candidat)): ?>
-                                <input type="hidden" name="id_candidat" value="<?= htmlspecialchars($id_candidat ?? '') ?>">
-                            <?php endif; ?>
-                            
-                            <!-- Étape 1: Informations de l'entreprise -->
-                            <div class="form-step active" data-step="1">
-                                <h2 class="h4 text-center text-dark fw-bold mb-4">Informations de l'entreprise</h2>
-                                
-                                <div class="mb-4">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="nom_entreprise" name="nom_entreprise" placeholder="Nom de l'entreprise" value="SARL TANA SERVICES" required>
-                                        <label for="nom_entreprise" class="fw-semibold">Nom de l'entreprise *</label>
-                                    </div>
+                        <div class="form-grid">
+                            <div class="form-grid form-grid-2">
+                                <div class="form-group">
+                                    <label for="salaire" class="form-label">
+                                        Salaire (Ariary) <span class="required">*</span>
+                                    </label>
+                                    <input type="number" class="form-control" id="salaire" name="salaire" 
+                                           min="0" step="1000" required placeholder="Ex: 500000">
                                 </div>
-                                
-                                <div class="mb-4">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="adresse_entreprise" name="adresse_entreprise" placeholder="Adresse de l'entreprise" value="Lot II M 45, Antananarivo 101, Madagascar" required>
-                                        <label for="adresse_entreprise" class="fw-semibold">Adresse de l'entreprise *</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="nif" name="nif" placeholder="NIF" value="1234567890 " required>
-                                            <label for="nif" class="fw-semibold">NIF *</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="stat" name="stat" placeholder="STAT" value="82901 11 2020 0 12345" required>
-                                            <label for="stat" class="fw-semibold">STAT *</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="directeur_general" name="directeur_general" placeholder="Directeur général" value="RAKOTONIRINA Sophie" required>
-                                        <label for="directeur_general" class="fw-semibold">Directeur général *</label>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="duree_contrat" class="form-label">
+                                        Durée du contrat <span class="required">*</span>
+                                    </label>
+                                    <select class="form-control" id="duree_contrat" name="duree_contrat" required>
+                                        <option value="">Sélectionner la durée</option>
+                                        <option value="1">1 mois</option>
+                                        <option value="2">2 mois</option>
+                                        <option value="3">3 mois</option>
+                                        <option value="6">6 mois</option>
+                                    </select>
                                 </div>
                             </div>
                             
-                            <!-- Étape 2: Conditions du contrat -->
-                            <div class="form-step" data-step="2">
-                                <h2 class="h4 text-center text-dark fw-bold mb-4">Conditions du contrat</h2>
-                                
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="number" class="form-control" id="salaire" name="salaire" min="0" step="1000" placeholder="Salaire" required>
-                                            <label for="salaire" class="fw-semibold">Salaire (Ar) *</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <select class="form-select" id="duree_contrat" name="duree_contrat" required>
-                                                <option value="">Sélectionner...</option>
-                                                <option value="1">1 mois</option>
-                                                <option value="2">2 mois</option>
-                                                <option value="3">3 mois</option>
-                                                <option value="6">6 mois</option>
-                                            </select>
-                                            <label for="duree_contrat" class="fw-semibold">Durée du contrat (mois) *</label>
-                                        </div>
-                                    </div>   
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="heures_travail" name="heures_travail" required>
-                                            <option value="">Sélectionner...</option>
-                                            <option value="35">35 heures</option>
-                                            <option value="40">40 heures</option>
-                                            <option value="45">45 heures</option>
-                                        </select>
-                                        <label for="heures_travail" class="fw-semibold">Heures de travail par semaine *</label>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="heures_travail" class="form-label">
+                                    Heures de travail par semaine <span class="required">*</span>
+                                </label>
+                                <select class="form-control" id="heures_travail" name="heures_travail" required>
+                                    <option value="">Sélectionner les heures</option>
+                                    <option value="35">35 heures/semaine</option>
+                                    <option value="40">40 heures/semaine</option>
+                                    <option value="45">45 heures/semaine</option>
+                                </select>
+                            </div>
 
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="mode_paiement" name="mode_paiement" required>
-                                            <option value="">Sélectionner...</option>
-                                            <option value="virementBancaire">Virement Bancaire</option>
-                                            <option value="cheque">Chèque</option>
-                                            <option value="espece">Espèce</option>
-                                        </select>
-                                        <label for="mode_paiement" class="fw-semibold">Mode de paiement *</label>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="mode_paiement" class="form-label">
+                                    Mode de paiement <span class="required">*</span>
+                                </label>
+                                <select class="form-control" id="mode_paiement" name="mode_paiement" required>
+                                    <option value="">Sélectionner le mode</option>
+                                    <option value="virementBancaire">Virement Bancaire</option>
+                                    <option value="cheque">Chèque</option>
+                                    <option value="espece">Espèce</option>
+                                </select>
                             </div>
-                            
-                            <!-- Étape 3: Horaires de travail -->
-                            <div class="form-step" data-step="3">
-                                <h2 class="h4 text-center text-dark fw-bold mb-4">Horaires de travail</h2>
-                                
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <div class="bg-light p-3 rounded border">
-                                            <h5 class="text-center fw-bold text-secondary mb-3">Matin</h5>
-                                            <div class="mb-3">
-                                                <div class="form-floating">
-                                                    <input type="time" class="form-control" id="heure_debut_matin" name="heure_debut_matin" value="08:00">
-                                                    <label for="heure_debut_matin" class="fw-semibold">Heure de début</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-floating">
-                                                <input type="time" class="form-control" id="heure_fin_matin" name="heure_fin_matin" value="12:00">
-                                                <label for="heure_fin_matin" class="fw-semibold">Heure de fin</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="bg-light p-3 rounded border">
-                                            <h5 class="text-center fw-bold text-secondary mb-3">Après-midi</h5>
-                                            <div class="mb-3">
-                                                <div class="form-floating">
-                                                    <input type="time" class="form-control" id="heure_debut_apres_midi" name="heure_debut_apres_midi" value="13:00">
-                                                    <label for="heure_debut_apres_midi" class="fw-semibold">Heure de début</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-floating">
-                                                <input type="time" class="form-control" id="heure_fin_apres_midi" name="heure_fin_apres_midi" value="17:00">
-                                                <label for="heure_fin_apres_midi" class="fw-semibold">Heure de fin</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="lieu" name="lieu" placeholder="Ex: Antananarivo" value="Antananarivo" required>
-                                        <label for="lieu" class="fw-semibold">Lieu</label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Boutons de navigation -->
-                            <div class="d-flex justify-content-between mt-5">
-                                <button type="button" class="btn btn-outline-secondary btn-md fw-semibold" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
-                                    ← Précédent
-                                </button>
-                                <div></div>
-                                <button type="button" class="btn btn-primary btn-md fw-semibold" id="nextBtn" onclick="changeStep(1)">
-                                    Suivant →
-                                </button>
-                                <button type="submit" class="btn btn-success btn-md fw-semibold" id="submitBtn" style="display: none;">
-                                    Valider
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                    
+                    <!-- Étape 3: Horaires de travail -->
+                    <div class="form-step" data-step="3">
+                        <h2 class="step-title">
+                            <i data-feather="clock"></i>
+                            Horaires de travail
+                        </h2>
+                        
+                        <div class="form-grid form-grid-2">
+                            <div class="time-section">
+                                <h5>
+                                    <i data-feather="sunrise"></i>
+                                    Horaires du matin
+                                </h5>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="heure_debut_matin" class="form-label">Heure de début</label>
+                                        <input type="time" class="form-control" id="heure_debut_matin" 
+                                               name="heure_debut_matin" value="08:00">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="heure_fin_matin" class="form-label">Heure de fin</label>
+                                        <input type="time" class="form-control" id="heure_fin_matin" 
+                                               name="heure_fin_matin" value="12:00">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-section">
+                                <h5>
+                                    <i data-feather="sunset"></i>
+                                    Horaires de l'après-midi
+                                </h5>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="heure_debut_apres_midi" class="form-label">Heure de début</label>
+                                        <input type="time" class="form-control" id="heure_debut_apres_midi" 
+                                               name="heure_debut_apres_midi" value="13:00">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="heure_fin_apres_midi" class="form-label">Heure de fin</label>
+                                        <input type="time" class="form-control" id="heure_fin_apres_midi" 
+                                               name="heure_fin_apres_midi" value="17:00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lieu" class="form-label">
+                                Lieu de travail <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="lieu" name="lieu" 
+                                   value="Antananarivo" required placeholder="Ville ou localisation">
+                        </div>
+                    </div>
+                    
+                    <!-- Boutons de navigation -->
+                    <div class="button-navigation">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
+                            <i data-feather="arrow-left"></i>
+                            Précédent
+                        </button>
+                        <div></div>
+                        <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+                            Suivant
+                            <i data-feather="arrow-right"></i>
+                        </button>
+                        <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                            <i data-feather="check"></i>
+                            Valider le contrat
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     
-    <script src="/js/bootstrap.bundle.min.js"></script>
     <script>
+        feather.replace();
+        
         let currentStep = 1;
         const totalSteps = 3;
         
         function updateProgress() {
             const progress = (currentStep / totalSteps) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = `Étape ${currentStep}/${totalSteps}`;
         }
         
         function showStep(step) {
@@ -318,6 +683,15 @@
             }
             return true;
         }
+        
+        // Validation en temps réel
+        document.querySelectorAll('input[required], select[required]').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    this.classList.remove('is-invalid');
+                }
+            });
+        });
         
         // Initialisation
         showStep(1);
