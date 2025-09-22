@@ -106,6 +106,10 @@
                         <?php endif; ?>
                         
                         <form action="/contrat-essai/submit" method="POST" id="contratForm">
+                            <?php if (!empty($id_candidat)): ?>
+                                <input type="hidden" name="id_candidat" value="<?= htmlspecialchars($id_candidat ?? '') ?>">
+                            <?php endif; ?>
+                            
                             <!-- Étape 1: Informations de l'entreprise -->
                             <div class="form-step active" data-step="1">
                                 <h2 class="h4 text-center text-dark fw-bold mb-4">Informations de l'entreprise</h2>

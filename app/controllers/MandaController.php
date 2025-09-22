@@ -2,20 +2,22 @@
 // manda_controller.php
 namespace app\controllers;
 use app\models\MandaModel;
+
 use Flight;
+use Exception;
 
 class MandaController {
     private $model;
     public $nb_questions = 5; // Variable modifiable
-    public $pourcentage_test = 60 / 10; // 60% pour le test
-    public $pourcentage_entretien = 40 / 10; // 40% pour l'entretien
+    public $pourcentage_test = 60 / 100; // 60% pour le test
+    public $pourcentage_entretien = 40 / 100; // 40% pour l'entretien
 
     public function __construct($pdo) {
         $this->model = new MandaModel($pdo);
         $variables = $this->model->getVariable();
         $this->nb_questions = $variables['nb_question'];
-        $this->pourcentage_test = $variables['pourcentage_test'];
-        $this->pourcentage_entretien = $variables['pourcentage_entretien'];
+        $this->pourcentage_test = $variables['pourcentage_test'] / 100;
+        $this->pourcentage_entretien = $variables['pourcentage_entretien'] / 100;
     }
 
     public function hasCandidateTakenTest($id_candidat, $id_fonction) {
@@ -82,7 +84,14 @@ class MandaController {
 
         $current_index = $_SESSION['current_q_index'];
         $question_id = $_SESSION['test_questions'][$current_index];
-        $question = $this->model->getQuestionWithChoices($question_id); 
+        try{
+            $question = $this->model->getQuestionWithChoices($question_id); 
+        }catch(Exception $e){
+            Flight::render('manda_message.php', [
+                'error_message' => 'les reponses aux questions sont actuellement mis en place, reessayer plus tard'
+            ]);
+            return;
+        }
 
         $_SESSION['questions_data'][$current_index] = $question;
 
@@ -320,7 +329,7 @@ public function enregistrerPourcentages() {
         return;
     }
 
-    if (abs($pourcentage_test + $pourcentage_entretien - 1) > 0.01) {
+    if ($pourcentage_test + $pourcentage_entretien != 100) {
         Flight::render('manda_message.php', [
             'error_message' => 'La somme des pourcentages doit être égale à 100.'
         ]);
@@ -468,5 +477,21 @@ public function afficherListeCandidats() {
         'fonctions' => $fonctions
     ]);
 }
+
+public function afficherCandidatsWithScore() {
+    if (!isset($_SESSION['id_fonction'])) {
+        Flight::render('manda_message.php', [
+            'error_message' => 'Aucune fonction sélectionnée.'
+        ]);
+        return;
+    }
+    $id_fonction = (int)$_SESSION['id_fonction'];
+    $candidats = $this->model->getCandidatsWithScoreByFonction($id_fonction);
+    Flight::render('liste_candidats_scoring.php', [
+        'candidats' => $candidats,
+        'id_fonction' => $id_fonction
+    ]);
+}
+
 }
 ?>

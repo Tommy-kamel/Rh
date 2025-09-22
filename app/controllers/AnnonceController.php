@@ -66,6 +66,8 @@ class AnnonceController{
         
         // Ensuite créer l'annonce
         $annonce_id = Flight::AnnonceModel()->ajouterAnnonce($poste, $date_limite, $critere_id, $id_fonction);
+
+        $id_poste = Flight::AnnonceModel()->ajouterPoste($poste, $id_fonction);
         
         // Enfin, ajouter les niveaux d'exigence
         if ($annonce_id) {

@@ -107,10 +107,12 @@ CREATE TABLE candidat_retenu (
 
 CREATE TABLE contrat_essai (
     id_contrat_essai INT PRIMARY KEY AUTO_INCREMENT,
-/*     id_employe INT, */
+/*  id_employe INT, */
     id_candidat_retenu INT,
-    date_debut DATE,
+    date_debut DATE, 
     date_fin DATE,
     salaire DECIMAL(15,2),
     FOREIGN KEY(id_candidat_retenu) REFERENCES candidat_retenu(id_candidat_retenu)
 );
+
+ALTER TABLE employe ADD COLUMN poste VARCHAR(50);

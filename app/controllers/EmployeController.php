@@ -196,4 +196,27 @@ class EmployeController{
         $filename = 'avenant_contrat_' . $id_contrat . '_' . date('Y-m-d_H-i-s') . '.pdf';
         $dompdf->stream($filename, ['Attachment' => 1, 'compress' => 1]);
     }
+
+    public function terminerContrat($id_employe) {
+        $employe = Flight::EmployeModel()->getEmployeById($id_employe);
+        if (!$employe) {
+            Flight::halt(404, 'Employé introuvable');
+            return;
+        }
+
+        $date_fin = date('Y-m-d');
+        $result = Flight::EmployeModel()->terminerContrat($id_employe, $date_fin);
+        if ($result) {
+            $message = "Le contrat de l'employé " . htmlspecialchars($employe['nom'] . ' ' . $employe['prenom']) . " a été terminé avec succès.";
+            $message_type = 'success';
+        } else {
+            $message = "Erreur lors de la terminaison du contrat.";
+            $message_type = 'error';
+        }
+
+        Flight::render('rh/liste_employe_sous_contrat', [
+            'message' => $message,
+            'message_type' => $message_type
+        ]);
+    }
 }

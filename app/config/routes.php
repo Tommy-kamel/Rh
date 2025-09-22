@@ -106,9 +106,9 @@ $router->get('/rh/recrutement/entretiens', [ $RecrutementController, 'afficherEn
 
 
 $ContratEssaiController = new ContratEssaiController();
-$router->get('/contrat-essai', [ $ContratEssaiController, 'showForm' ]);
-$router->post('/contrat-essai/submit', [ $ContratEssaiController, 'submitForm' ]);
 $router->get('/contrat-essai/export-pdf', [ $ContratEssaiController, 'exportPdf' ]);
+$router->get('/contrat-essai/@id_candidat', [ $ContratEssaiController, 'showForm' ]);
+$router->post('/contrat-essai/submit', [ $ContratEssaiController, 'submitForm' ]);
 
 $EmployeController = new EmployeController();
 $router->get('/rh/menu_employe', [$EmployeController, 'showMenu']);
@@ -117,6 +117,8 @@ $router->get('/rh/menu_employe/employes-contrat-essai', [$EmployeController, 'li
 $router->get('/rh/employe-essai/embaucher/@id', [$EmployeController, 'embaucherEmploye']);
 $router->get('/rh/contrat/export-pdf/@id_contrat', [ $EmployeController, 'exportContratPdf' ]);
 $router->get('/rh/contrat/@id_contrat', [ $EmployeController, 'showContrat' ]);
+// $router->get('/rh/employe/@id_employe', [ $EmployeController, 'showEmployeDetails' ]);
+$router->get('/rh/employe/terminer/@id_employe', [ $EmployeController, 'terminerContrat' ]);
 
 
 $FiltrageController = new FiltrageController();

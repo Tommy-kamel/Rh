@@ -43,8 +43,8 @@
 <body>
     <div class="container">
         <h1>Gestion des Questions pour la Fonction ID: <?= htmlspecialchars($id_fonction) ?></h1>
-        <p>le pourcentage du test QCM dans le systeme de scoring est <?=$pourcentage_test ?>%</p>
-        <p>le pourcentage de l entretien dans le systeme de scoring est <?=$pourcentage_entretien ?>% <a href="modifier_pourcentages">modifier</a></p>
+        <p>le pourcentage du test QCM dans le systeme de scoring est <?=$pourcentage_test * 100 ?>%</p>
+        <p>le pourcentage de l entretien dans le systeme de scoring est <?=$pourcentage_entretien * 100 ?>% <a href="modifier_pourcentages">modifier</a></p>
 
         <button onclick="document.getElementById('add-question-form').style.display='block'">Ajouter une Question</button>
         

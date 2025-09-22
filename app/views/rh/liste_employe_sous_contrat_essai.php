@@ -136,7 +136,7 @@
                             <th>ID</th>
                             <th>Nom</th>
                             <th>Prénom</th>
-                            <th>Poste</th>
+                            <!-- <th>Poste</th> -->
                             <th>Date de début</th>
                             <th>Date de fin</th>
                             <th>Salaire</th>
@@ -149,12 +149,10 @@
                                 <td><?= htmlspecialchars($employe['id_contrat_essai'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($employe['nom'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($employe['prenom'] ?? '') ?></td>
-                                <td><?= htmlspecialchars($employe['poste'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($employe['date_debut'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($employe['date_fin'] ?? 'En cours') ?></td>
                                 <td><?= htmlspecialchars($employe['salaire'] ?? '') ?> Ar</td>
                                 <td>
-                                    <a href="/rh/employe-essai/<?= $employe['id_contrat_essai'] ?>" class="btn btn-sm btn-primary">Voir détails</a>
                                     <a href="/rh/employe-essai/embaucher/<?= $employe['id_contrat_essai'] ?>" class="btn btn-sm btn-primary">Embaucher</a>
                                 </td>
                             </tr>

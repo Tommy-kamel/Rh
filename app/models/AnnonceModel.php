@@ -44,6 +44,15 @@ class AnnonceModel {
         $stmt->execute();
         return $this->db->lastInsertId();
     }
+
+    public function ajouterPoste($nom,$id_fonction) {
+        $stmt = $this->db->prepare("
+            INSERT INTO poste (id_fonction,nom) 
+            VALUES ('".$id_fonction."', '".$nom."')
+        ");
+        $stmt->execute();
+        return $this->db->lastInsertId();
+    }
     
     // Ajouter des critères pour une annonce
     public function ajouterCriteres($age_min, $age_max, $sexe, $experience, $diplome, $langues, $lieu_a_proximite = '') {

@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Planifier les entretiens</h5>
                         <p class="card-text">Programmez des entretiens avec les candidats sélectionnés.</p>
-                        <a href="/rh/recrutement/entretiens" class="btn btn-primary">Accéder</a>
+                        <a href="/liste_fonctions" class="btn btn-primary">Accéder</a>
                     </div>
                 </div>
             </div>

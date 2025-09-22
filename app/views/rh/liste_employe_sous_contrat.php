@@ -121,7 +121,7 @@
                             <th>ID</th>
                             <th>Nom</th>
                             <th>Prénom</th>
-                            <th>Poste</th>
+                            <!-- <th>Poste</th> -->
                             <th>Date d'embauche</th>
                             <th>Salaire</th>
                             <th>Actions</th>
@@ -133,11 +133,10 @@
                                 <td><?= htmlspecialchars($employe['id_employe'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($employe['nom'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($employe['prenom'] ?? '') ?></td>
-                                <td><?= htmlspecialchars($employe['poste'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($employe['date_debut'] ?? '') ?></td>
                                 <td><?= htmlspecialchars($employe['salaire'] ?? '') ?> Ar</td>
                                 <td>
-                                    <a href="/rh/employe/<?= $employe['id_employe'] ?>" class="btn btn-sm btn-primary">Voir détails</a>
+                                    <a href="/rh/employe/terminer/<?= $employe['id_employe'] ?>" class="btn btn-sm btn-danger">Terminer le contrat</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

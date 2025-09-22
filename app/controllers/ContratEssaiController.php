@@ -10,8 +10,8 @@ class ContratEssaiController{
 
     }
     
-    public function showForm() {
-        Flight::render('FormContratEssai');
+    public function showForm($id_candidat) {
+        Flight::render('FormContratEssai', ['id_candidat' => $id_candidat]);
     }
 
     public function submitForm() {
@@ -20,10 +20,40 @@ class ContratEssaiController{
         $nif = Flight::request()->data['nif'] ?? null;
         $stat = Flight::request()->data['stat'] ?? null;
         $directeur_general = Flight::request()->data['directeur_general'] ?? null;
-        $nom_salarie = "Rakoto"; // nom salarie
-        $adresse_salarie = "Antananarivo"; // adresse salarie
-        $poste = "Développeur"; // poste
-        $fonction = "Informatique"; // fonction
+        $id_candidat = Flight::request()->data['id_candidat'] ?? null;
+        
+        // Log the received id_candidat
+        error_log("ContratEssaiController::submitForm - Received id_candidat: " . ($id_candidat ?? 'null'));
+        
+        $candidat_retenu = Flight::EmployeModel()->getCandidatRetenuById($id_candidat);
+        
+        // Log the result of getCandidatRetenuById
+        if ($candidat_retenu) {
+            error_log("ContratEssaiController::submitForm - Candidat retenu found: " . json_encode($candidat_retenu));
+            $nom_salarie = $candidat_retenu['nom'] . ' ' . $candidat_retenu['prenom']; // nom salarie
+            $adresse_salarie = $candidat_retenu['adresse']; // adresse salarie
+            $date_naissance = $candidat_retenu['date_de_naissance']; // date de naissance
+        } else {
+            error_log("ContratEssaiController::submitForm - Candidat retenu not found for id_candidat: " . ($id_candidat ?? 'null'));
+            Flight::halt(400, 'Candidat retenu non trouvé.');
+            return;
+        }
+
+        $candidat = Flight::EmployeModel()->getCandidatById($id_candidat);
+
+        // Log the result of getCandidatById
+        if ($candidat) {
+            error_log("ContratEssaiController::submitForm - Candidat found: " . json_encode($candidat));
+            $id_annonce = $candidat['id_annonce'];
+            $poste = Flight::EmployeModel()->getPosteByIdAnnonce($id_annonce)['nom']; // poste
+            $id_poste = Flight::EmployeModel()->getPosteByIdAnnonce($id_annonce)['id_poste'];
+            $adresse_salarie = $candidat['adresse']; // adresse salarie 
+            $fonction = Flight::EmployeModel()->getFonctionByIdPoste($id_poste)['nom_fonction']; // fonction
+        } else {
+            error_log("ContratEssaiController::submitForm - Candidat not found for id_candidat: " . ($id_candidat ?? 'null'));
+            Flight::halt(400, 'Candidat non trouvé.');
+            return;
+        }
 
         $duree = Flight::request()->data['duree_contrat'] ?? null;
         $debut = date('Y-m-d'); // Utilise la date d'aujourd'hui au format YYYY-MM-DD
@@ -63,30 +93,47 @@ class ContratEssaiController{
                 'heure_fin_matin' => Flight::request()->data['heure_fin_matin'] ?? null,
                 'heure_debut_apres_midi' => Flight::request()->data['heure_debut_apres_midi'] ?? null,
                 'heure_fin_apres_midi' => Flight::request()->data['heure_fin_apres_midi'] ?? null,
+                'date_naissance' => $date_naissance,
+                'cin' => $candidat_retenu['cin'] ?? '',
                 'date_signature' => date('d/m/Y')
             ];
             $_SESSION['contrat'] = $contratData; 
-        
+            $id_contrat_essai = Flight::EmployeModel()->creerContratEssai($candidat_retenu['id_candidat_retenu'], $salaire, $date_debut);
             Flight::render('ContratEssai', $contratData);
         }
     }
 
 
     public function exportPdf() {
+        error_log("Export PDF called");
+        
         // Retrieve contrat data from session or model
         $contratData = $_SESSION['contrat'] ?? null;
         if (!$contratData) {
+            error_log("No contrat data in session");
             Flight::halt(400, 'Aucune donnée de contrat trouvée. Veuillez soumettre le formulaire d\'abord.');
             return;
         }
-    
-        // Load Markdown template
-        $markdownTemplate = file_get_contents(__DIR__ . '/../../Contrat_Engagement_Essai_Madagascar.markdown');
+        
+        $markdownPath = __DIR__ . '/../../Contrat_Engagement_Essai_Madagascar.markdown';
+        error_log("Markdown path: " . $markdownPath);
+        
+        if (!file_exists($markdownPath)) {
+            error_log("Markdown file not found");
+            Flight::halt(500, 'Template de contrat non trouvé.');
+            return;
+        }
+        
+        $markdownTemplate = file_get_contents($markdownPath);
+        if ($markdownTemplate === false) {
+            error_log("Failed to read markdown file");
+            Flight::halt(500, 'Erreur lors de la lecture du template.');
+            return;
+        }
     
         // Remove backslashes from placeholders
         $markdownTemplate = preg_replace('/\\\\\[/', '[', $markdownTemplate);
         $markdownTemplate = preg_replace('/\\\\\]/', ']', $markdownTemplate);
-
         // Remove all remaining backslashes
         $markdownTemplate = str_replace('\\', '', $markdownTemplate);
     
@@ -131,16 +178,30 @@ class ContratEssaiController{
         // Wrap in basic HTML structure with Arial font
         $html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Contrat d\'Engagement à l\'Essai</title><style>body { font-family: Arial, sans-serif; }</style></head><body>' . $htmlContent . '</body></html>';
     
-        // Generate PDF using Dompdf
-        require_once __DIR__ . '/../../public/assets/lib/dompdf/autoload.inc.php';
-        $options = new \Dompdf\Options();
-        $options->set('defaultFont', 'Arial');
-        $options->set('isRemoteEnabled', true);
-        $dompdf = new \Dompdf\Dompdf($options);
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        $filename = 'contrat_engagement_essai_' . date('Y-m-d_H-i-s') . '.pdf';
-        $dompdf->stream($filename, ['Attachment' => 1, 'compress' => 1]);
+        $dompdfPath = __DIR__ . '/../../public/assets/lib/dompdf/autoload.inc.php';
+        error_log("Dompdf path: " . $dompdfPath);
+        
+        if (!file_exists($dompdfPath)) {
+            error_log("Dompdf autoload not found");
+            Flight::halt(500, 'Bibliothèque PDF non trouvée.');
+            return;
+        }
+        
+        require_once $dompdfPath;
+        
+        try {
+            $options = new \Dompdf\Options();
+            $options->set('defaultFont', 'Arial');
+            $options->set('isRemoteEnabled', true);
+            $dompdf = new \Dompdf\Dompdf($options);
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $filename = 'contrat_engagement_essai_' . date('Y-m-d_H-i-s') . '.pdf';
+            $dompdf->stream($filename, ['Attachment' => 1, 'compress' => 1]);
+        } catch (Exception $e) {
+            error_log("PDF generation error: " . $e->getMessage());
+            Flight::halt(500, 'Erreur lors de la génération du PDF.');
+        }
     }
 }

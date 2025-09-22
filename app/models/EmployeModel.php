@@ -38,6 +38,30 @@ class EmployeModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getCandidatById($id_candidat) {
+        $stmt = $this->db->prepare("SELECT * FROM candidat WHERE id_candidat = :id_candidat");
+        $stmt->execute([':id_candidat' => $id_candidat]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getPosteByIdAnnonce($id_annonce) {
+        $stmt = $this->db->prepare("SELECT p.* FROM poste p JOIN annonce a ON p.nom = a.poste_voulu WHERE a.id_annonce = :id_annonce");
+        $stmt->execute([':id_annonce' => $id_annonce]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getFonctionByIdPoste($id_poste){
+        $stmt = $this->db->prepare("SELECT f.* FROM fonction f JOIN poste p ON f.id_fonction = p.id_fonction WHERE p.id_poste = :id_poste");
+        $stmt->execute([':id_poste' => $id_poste]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getCandidatRetenuById($id_candidat) {
+        $stmt = $this->db->prepare("SELECT * FROM candidat_retenu WHERE id_candidat = :id_candidat");
+        $stmt->execute([':id_candidat' => $id_candidat]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function createEmploye($nom, $prenom, $sexe, $mail, $tel, $date_naissance, $adresse) {
         try {
             $stmt = $this->db->prepare("INSERT INTO employe (nom, prenom, sexe, mail, telephone, date_naissance, adresse) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -158,5 +182,24 @@ class EmployeModel {
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function creerContratEssai($id_candidat_retenu, $salaire) {
+        $date_debut = date('Y-m-d');
+        $stmt = $this->db->prepare("INSERT INTO contrat_essai (id_candidat_retenu, date_debut, date_fin, salaire) VALUES (:id_candidat_retenu, :date_debut, NULL, :salaire)");
+        $stmt->execute([
+            ':id_candidat_retenu' => $id_candidat_retenu,
+            ':salaire' => $salaire,
+            ':date_debut' => $date_debut
+        ]);
+        return $this->db->lastInsertId();
+    }
+
+    public function terminerContrat($id_contrat, $date_fin) {
+        $stmt = $this->db->prepare("UPDATE contrat SET date_fin = :date_fin WHERE id_contrat = :id_contrat");
+        return $stmt->execute([
+            ':date_fin' => $date_fin,
+            ':id_contrat' => $id_contrat
+        ]);
     }
 }
