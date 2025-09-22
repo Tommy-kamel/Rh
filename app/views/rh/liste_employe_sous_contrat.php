@@ -279,7 +279,7 @@
         .alert-info {
             background: rgba(13, 202, 240, 0.1);
             color: #055160;
-            border-left: 4px solid #0dcaf0;
+            /* border-left: 4px solid #0dcaf0; */
         }
 
         .user-info {

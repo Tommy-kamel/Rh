@@ -122,7 +122,7 @@
             font-size: 1.3rem;
             margin-bottom: 40px;
             /* color: var(--light-text-color); */
-            color: white;
+            /* color: white; */
             line-height: 1.6;
         }
 

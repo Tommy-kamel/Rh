@@ -221,7 +221,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent-color), #8b5cf6);
+            /* background: linear-gradient(90deg, var(--accent-color), #8b5cf6); */
         }
 
         .annonce:hover {

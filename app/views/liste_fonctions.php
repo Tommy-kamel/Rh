@@ -188,7 +188,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), #5a6acf);
+            /* background: linear-gradient(90deg, var(--primary-color), #5a6acf); */
         }
 
         .fonction-card:hover {
@@ -429,15 +429,15 @@
                         </h5>
                         
                         <div class="btn-container">
-                            <button class="btn-custom btn-questions" onclick="setFonctionAndRedirect(<?= $fonction['id_fonction'] ?>, '/question_test')">
+                            <!-- <button class="btn-custom btn-questions" onclick="setFonctionAndRedirect(<?= $fonction['id_fonction'] ?>, '/question_test')">
                                 <i data-feather="edit-3" class="btn-icon"></i>
                                 Modifier les Questions
-                            </button>
+                            </button> -->
                             <button class="btn-custom btn-candidats" onclick="setFonctionAndRedirect(<?= $fonction['id_fonction'] ?>, '/liste_candidat')">
                                 <i data-feather="users" class="btn-icon"></i>
                                 Voir les candidats
                             </button>
-                            <button class="btn-custom btn-entretien" onclick="setFonctionAndRedirect(<?= $fonction['id_fonction'] ?>, '/liste_candidats_scoring')">
+                            <button class="btn-custom btn-questions" onclick="setFonctionAndRedirect(<?= $fonction['id_fonction'] ?>, '/liste_candidats_scoring')">
                                 <i data-feather="check-circle" class="btn-icon"></i>
                                 Candidats après entretien
                             </button>

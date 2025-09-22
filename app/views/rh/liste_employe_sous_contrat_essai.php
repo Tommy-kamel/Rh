@@ -498,10 +498,10 @@
                                             <i data-feather="check-circle" style="width: 14px; height: 14px;"></i>
                                             Embaucher
                                         </a>
-                                        <a href="/rh/employe/terminer-essai/<?= $employe['id_contrat_essai'] ?>" class="btn btn-danger">
+                                        <!-- <a href="/rh/employe/terminer-essai/<?= $employe['id_contrat_essai'] ?>" class="btn btn-danger">
                                             <i data-feather="x-circle" style="width: 14px; height: 14px;"></i>
                                             Terminer essai
-                                        </a>
+                                        </a> -->
                                     </div>
                                 </td>
                             </tr>

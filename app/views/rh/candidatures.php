@@ -284,7 +284,7 @@ $activeMenu = "recrutement";
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), #5a6acf);
+            /* background: linear-gradient(90deg, var(--primary-color), #5a6acf); */
         }
 
         .candidate-card:hover {
